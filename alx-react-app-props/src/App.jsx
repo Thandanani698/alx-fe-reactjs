@@ -1,6 +1,6 @@
-import React from "react";
-import ProfilePage from "./components/ProfilePage"; 
-import { UserProvider } from "./UserContext"; // This should now work!
+import React from 'react';
+import ProfilePage from './components/ProfilePage';
+import { UserProvider } from './components/UserContext';
 
 function App() {
   return (
