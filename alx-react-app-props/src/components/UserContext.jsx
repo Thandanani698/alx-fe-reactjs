@@ -1,6 +1,6 @@
-// src/components/UserContext.jsx
 import React, { createContext } from 'react';
 
+// Create a UserContext
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
