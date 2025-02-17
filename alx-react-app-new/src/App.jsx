@@ -1,19 +1,13 @@
-import Header from "./components/Header";
-import MainContent from "./components/MainContent";
-import Footer from "./components/Footer";
-import UserProfile from "./components/UserProfile"; // Import UserProfile
+import React from 'react';
+import Counter from './components/Counter';
 
 function App() {
   return (
-    <>
-      <Header />
-      <MainContent />
-
-      {/* Add UserProfile component */}
-      <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
-
-      <Footer />
-    </>
+    <div>
+      <h1>Counter Application</h1>
+      {/* Include the Counter component */}
+      <Counter />
+    </div>
   );
 }
 
