@@ -1,9 +1,9 @@
 // src/components/UserDetails.jsx
 import { useContext } from 'react';
-import UserContext from './UserContext.jsx'; // Import UserContext
+import UserContext from './UserContext';
 
 function UserDetails() {
-  const { user } = useContext(UserContext); // Consume Context
+  const { user } = useContext(UserContext); // Consume context here
 
   return (
     <div>
