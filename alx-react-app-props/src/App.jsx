@@ -1,11 +1,10 @@
-import React from 'react';
-import ProfilePage from './components/ProfilePage';
-import { UserProvider } from './components/UserContext'; // Import UserProvider
-import './App.css';  // Import the CSS file
+// src/App.jsx
+import { UserProvider } from './components/UserContext.jsx'; // Import UserProvider
+import ProfilePage from './components/ProfilePage.jsx';
 
 function App() {
   return (
-    <UserProvider> {/* Wrap the ProfilePage component with UserProvider */}
+    <UserProvider>
       <ProfilePage />
     </UserProvider>
   );
