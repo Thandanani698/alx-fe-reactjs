@@ -1,6 +1,6 @@
-// src/App.jsx
-import { UserProvider } from './components/UserContext';
-import ProfilePage from './components/ProfilePage';
+import "./App.css"; // Import the CSS file
+import ProfilePage from "./components/ProfilePage";
+import { UserProvider } from "./components/UserContext";
 
 function App() {
   return (

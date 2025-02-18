@@ -1,12 +1,8 @@
 // src/components/ProfilePage.jsx
-import UserInfo from './UserInfo';
-import { useContext } from 'react';
-import UserContext from './UserContext';
+import UserInfo from "./UserInfo";
 
 function ProfilePage() {
-  const { user } = useContext(UserContext); // Consume context here
-
-  return <UserInfo user={user} />;
+  return <UserInfo />; // No need to pass userData
 }
 
 export default ProfilePage;
