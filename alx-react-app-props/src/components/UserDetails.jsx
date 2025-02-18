@@ -7,8 +7,8 @@ function UserDetails() {
 
   return (
     <div className="user-info">
-      <p className="user-text">Name: {user.name}</p>
-      <p className="user-text">Email: {user.email}</p>
+      <p>Name: {user.name}</p>
+      <p>Email: {user.email}</p>
     </div>
   );
 }
