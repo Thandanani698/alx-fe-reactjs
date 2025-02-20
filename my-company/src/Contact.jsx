@@ -1,52 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+const Contact = () => {
+  const [message, setMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Form submitted!');
+    alert(`Message Sent: ${message}`);
+    setMessage("");
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Contact Us</h1>
+    <div style={{ padding: "20px", textAlign: "center" }}>
+      <h2>Contact Us</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          value={formData.name}
-          onChange={handleChange}
-          style={{ display: 'block', margin: '10px 0' }}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          value={formData.email}
-          onChange={handleChange}
-          style={{ display: 'block', margin: '10px 0' }}
-        />
         <textarea
-          name="message"
-          placeholder="Your Message"
-          value={formData.message}
-          onChange={handleChange}
-          style={{ display: 'block', margin: '10px 0' }}
+          style={{ width: "80%", height: "100px", padding: "10px" }}
+          placeholder="Write your message here..."
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
         />
-        <button type="submit">Send Message</button>
+        <br />
+        <button type="submit" style={{ marginTop: "10px", padding: "10px" }}>
+          Send Message
+        </button>
       </form>
     </div>
   );
-}
+};
 
 export default Contact;
