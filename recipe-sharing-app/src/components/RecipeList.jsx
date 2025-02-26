@@ -3,22 +3,24 @@ import { Link } from "react-router-dom";
 import { useRecipeStore } from "../store/recipeStore";
 
 const RecipeList = () => {
-  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
+  const { recipes, favorites, addFavorite, removeFavorite } = useRecipeStore();
 
   return (
     <div>
-      {filteredRecipes.length > 0 ? (
-        filteredRecipes.map((recipe) => (
-          <div key={recipe.id}>
-            <h3>{recipe.title}</h3>
-            <p>{recipe.description}</p>
-            {/* Add Link to navigate to recipe details */}
-            <Link to={`/recipe/${recipe.id}`}>View Details</Link>
-          </div>
-        ))
-      ) : (
-        <p>No recipes found.</p>
-      )}
+      {recipes.map((recipe) => (
+        <div key={recipe.id}>
+          <h3>{recipe.title}</h3>
+          <p>{recipe.description}</p>
+          <Link to={`/recipe/${recipe.id}`}>View Details</Link>
+
+          {/* Favorite/Unfavorite Button */}
+          {favorites.includes(recipe.id) ? (
+            <button onClick={() => removeFavorite(recipe.id)}>Remove from Favorites</button>
+          ) : (
+            <button onClick={() => addFavorite(recipe.id)}>Add to Favorites</button>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
