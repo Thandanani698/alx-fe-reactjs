@@ -9,7 +9,7 @@ function App() {
     <Router>
       <div className="app-container">
         <h1>Recipe Sharing App</h1>
-        <SearchBar /> {/* Add Search Bar here */}
+        <SearchBar /> {/* Add Search Bar */}
         <Routes>
           <Route path="/" element={<RecipeList />} />
           <Route path="/add" element={<AddRecipeForm />} />
