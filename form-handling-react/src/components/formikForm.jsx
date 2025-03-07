@@ -19,11 +19,13 @@ const FormikForm = () => {
         email: '',
         password: '',
       }}
-      validationSchema={validationSchema} // Use Yup for validation
-      onSubmit={(values, { setSubmitting }) => {
-        // Simulate form submission (e.g., API request)
-        console.log('Form Data:', values);
-        setSubmitting(false);
+      validationSchema={validationSchema} // Yup schema for validation
+      onSubmit={(values, { setSubmitting, setErrors }) => {
+        // Log the form data when submitted
+        console.log('Submitted values:', values); // This will log the form data to the console
+
+        // Simulate an API request or form submission
+        setSubmitting(false); // End submission process
       }}
     >
       {({ isSubmitting }) => (
