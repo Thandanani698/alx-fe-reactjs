@@ -14,7 +14,8 @@ function App() {
         <h1>React Router Advanced</h1>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/post/:postId" element={<BlogPost />} />
+          {/* Updated this to include /blog/:id */}
+          <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/profile/*" element={<ProtectedRoute element={<Profile />} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -2,13 +2,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-const BlogPost = () => {
-  const { postId } = useParams(); // Access dynamic URL segment
+function BlogPost() {
+  const { id } = useParams(); // Get the dynamic 'id' parameter
 
   return (
     <div>
-      <h2>Blog Post {postId}</h2>
-      <p>This is a dynamically routed blog post with ID: {postId}</p>
+      <h2>Blog Post {id}</h2>
+      {/* You can fetch and display content based on the ID */}
+      <p>Displaying content for blog post with ID: {id}</p>
     </div>
   );
 }
