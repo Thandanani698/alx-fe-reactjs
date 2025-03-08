@@ -1,35 +1,41 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 
-// Function to fetch posts from the API
 const fetchPosts = async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-  if (!response.ok) {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+  if (!res.ok) {
     throw new Error('Network response was not ok');
   }
-  return response.json();
+  return res.json();
 };
 
 const PostsComponent = () => {
-  // Using React Query's useQuery hook to fetch posts
-  const { data, error, isLoading, isFetching, refetch } = useQuery('posts', fetchPosts, {
-    // Caching and refetching options
-    cacheTime: 1000 * 60 * 5, // Cache data for 5 minutes
-    staleTime: 1000 * 60 * 2, // Data considered fresh for 2 minutes
-    refetchOnWindowFocus: true, // Refetch data when the window is focused
-    keepPreviousData: true, // Keep the previous data while new data is loading
-  });
+  // Fetch posts using useQuery with options for caching and refetching
+  const { data, error, isLoading, isError, refetch } = useQuery(
+    'posts', // Query key
+    fetchPosts, // Data fetching function
+    {
+      cacheTime: 600000, // Cache for 10 minutes
+      staleTime: 300000, // Data will be fresh for 5 minutes
+      refetchOnWindowFocus: false, // Disable refetch on window focus
+      keepPreviousData: true, // Keep previous data while refetching
+    }
+  );
 
-  // Handle loading, error, and successful data fetching
-  if (isLoading) return <div>Loading...</div>;
-  if (error instanceof Error) return <div>Error: {error.message}</div>;
+  // Loading state
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  // Error handling
+  if (isError) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div>
       <h1>Posts</h1>
-      <button onClick={refetch} disabled={isFetching}>
-        {isFetching ? 'Refetching...' : 'Refetch Data'}
-      </button>
+      <button onClick={refetch}>Refetch Data</button>
       <ul>
         {data.map((post) => (
           <li key={post.id}>
