@@ -7,7 +7,7 @@ function App() {
     <div>
       <h1>Controlled Components Form</h1>
       <RegistrationForm />
-
+      
       <h1>Formik Form</h1>
       <FormikForm />
     </div>
