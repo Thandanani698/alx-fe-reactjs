@@ -17,7 +17,6 @@ const RegistrationForm = () => {
     e.preventDefault();
 
     let newErrors = {};
-
     if (!formData.username) newErrors.username = "Username is required";
     if (!formData.email) newErrors.email = "Email is required";
     if (!formData.password) newErrors.password = "Password is required";
@@ -34,19 +33,34 @@ const RegistrationForm = () => {
     <form onSubmit={handleSubmit}>
       <div>
         <label>Username:</label>
-        <input type="text" name="username" value={formData.username} onChange={handleChange} />
+        <input
+          type="text"
+          name="username"
+          value={formData.username}  // ✅ Controlled Component
+          onChange={handleChange}  // ✅ Updates state
+        />
         {errors.username && <div style={{ color: "red" }}>{errors.username}</div>}
       </div>
 
       <div>
         <label>Email:</label>
-        <input type="email" name="email" value={formData.email} onChange={handleChange} />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}  // ✅ Controlled Component
+          onChange={handleChange}  // ✅ Updates state
+        />
         {errors.email && <div style={{ color: "red" }}>{errors.email}</div>}
       </div>
 
       <div>
         <label>Password:</label>
-        <input type="password" name="password" value={formData.password} onChange={handleChange} />
+        <input
+          type="password"
+          name="password"
+          value={formData.password}  // ✅ Controlled Component
+          onChange={handleChange}  // ✅ Updates state
+        />
         {errors.password && <div style={{ color: "red" }}>{errors.password}</div>}
       </div>
 
