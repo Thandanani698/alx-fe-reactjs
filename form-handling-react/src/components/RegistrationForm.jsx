@@ -15,18 +15,19 @@ const RegistrationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let validationErrors = {};
 
-    let newErrors = {};
-    if (!formData.username) newErrors.username = "Username is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.password) newErrors.password = "Password is required";
+    if (!formData.username) validationErrors.username = "Username is required";
+    if (!formData.email) validationErrors.email = "Email is required";
+    if (!formData.password) validationErrors.password = "Password is required";
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
     console.log("Form submitted:", formData);
+    setErrors({});
   };
 
   return (
@@ -36,10 +37,10 @@ const RegistrationForm = () => {
         <input
           type="text"
           name="username"
-          value={formData.username}  // ✅ Controlled Component
-          onChange={handleChange}  // ✅ Updates state
+          value={formData.username}
+          onChange={handleChange}
         />
-        {errors.username && <div style={{ color: "red" }}>{errors.username}</div>}
+        {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
       </div>
 
       <div>
@@ -47,10 +48,10 @@ const RegistrationForm = () => {
         <input
           type="email"
           name="email"
-          value={formData.email}  // ✅ Controlled Component
-          onChange={handleChange}  // ✅ Updates state
+          value={formData.email}
+          onChange={handleChange}
         />
-        {errors.email && <div style={{ color: "red" }}>{errors.email}</div>}
+        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
       </div>
 
       <div>
@@ -58,10 +59,10 @@ const RegistrationForm = () => {
         <input
           type="password"
           name="password"
-          value={formData.password}  // ✅ Controlled Component
-          onChange={handleChange}  // ✅ Updates state
+          value={formData.password}
+          onChange={handleChange}
         />
-        {errors.password && <div style={{ color: "red" }}>{errors.password}</div>}
+        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
       </div>
 
       <button type="submit">Register</button>

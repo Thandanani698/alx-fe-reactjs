@@ -1,7 +1,9 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { submitRegistration } from "../api/api";
 
+// Validation Schema
 const validationSchema = Yup.object({
   username: Yup.string().required("Username is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -9,14 +11,21 @@ const validationSchema = Yup.object({
 });
 
 const FormikForm = () => {
+  const handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      const response = await submitRegistration(values);
+      console.log("Registration successful:", response);
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
+    setSubmitting(false);
+  };
+
   return (
     <Formik
       initialValues={{ username: "", email: "", password: "" }}
       validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        console.log("Formik Form Submitted", values);
-        setSubmitting(false);
-      }}
+      onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
         <Form>
@@ -38,7 +47,9 @@ const FormikForm = () => {
             <ErrorMessage name="password" component="div" style={{ color: "red" }} />
           </div>
 
-          <button type="submit" disabled={isSubmitting}>Register</button>
+          <button type="submit" disabled={isSubmitting}>
+            Register
+          </button>
         </Form>
       )}
     </Formik>

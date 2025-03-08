@@ -1,12 +1,11 @@
-export const submitRegistration = async (values) => {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
-    return response.json();
-  } catch (error) {
-    throw new Error("Registration failed");
-  }
+export const submitRegistration = async (formData) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (formData.email === "error@example.com") {
+        reject("Registration failed: Email already in use.");
+      } else {
+        resolve({ message: "User registered successfully!", data: formData });
+      }
+    }, 1000);
+  });
 };
