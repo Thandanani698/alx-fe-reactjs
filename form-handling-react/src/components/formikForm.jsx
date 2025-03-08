@@ -2,30 +2,21 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-// Validation Schema using Yup
+// ✅ **Yup Validation Schema**
 const validationSchema = Yup.object({
   username: Yup.string().required('Username is required'),
   email: Yup.string().email('Invalid email format').required('Email is required'),
-  password: Yup.string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
+  password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
 });
 
 const FormikForm = () => {
   return (
     <Formik
-      initialValues={{
-        username: '',
-        email: '',
-        password: '',
-      }}
-      validationSchema={validationSchema} // Yup schema for validation
-      onSubmit={(values, { setSubmitting, setErrors }) => {
-        // Log the form data when submitted
-        console.log('Submitted values:', values); // This will log the form data to the console
-
-        // Simulate an API request or form submission
-        setSubmitting(false); // End submission process
+      initialValues={{ username: '', email: '', password: '' }}
+      validationSchema={validationSchema} // ✅ Formik + Yup Validation
+      onSubmit={(values, { setSubmitting }) => {
+        console.log('Form Submitted:', values);
+        setSubmitting(false);
       }}
     >
       {({ isSubmitting }) => (
