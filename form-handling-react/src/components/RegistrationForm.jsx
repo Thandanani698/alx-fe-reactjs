@@ -15,17 +15,12 @@ const RegistrationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newErrors = {};
 
-    if (!formData.username) {
-      newErrors.username = "Username is required";
-    }
-    if (!formData.email) {
-      newErrors.email = "Email is required";
-    }
-    if (!formData.password) {
-      newErrors.password = "Password is required";
-    }
+    let newErrors = {};
+
+    if (!formData.username) newErrors.username = "Username is required";
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.password) newErrors.password = "Password is required";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -39,35 +34,20 @@ const RegistrationForm = () => {
     <form onSubmit={handleSubmit}>
       <div>
         <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-        {errors.username && <span style={{ color: "red" }}>{errors.username}</span>}
+        <input type="text" name="username" value={formData.username} onChange={handleChange} />
+        {errors.username && <div style={{ color: "red" }}>{errors.username}</div>}
       </div>
 
       <div>
         <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        {errors.email && <span style={{ color: "red" }}>{errors.email}</span>}
+        <input type="email" name="email" value={formData.email} onChange={handleChange} />
+        {errors.email && <div style={{ color: "red" }}>{errors.email}</div>}
       </div>
 
       <div>
         <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        {errors.password && <span style={{ color: "red" }}>{errors.password}</span>}
+        <input type="password" name="password" value={formData.password} onChange={handleChange} />
+        {errors.password && <div style={{ color: "red" }}>{errors.password}</div>}
       </div>
 
       <button type="submit">Register</button>
