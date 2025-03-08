@@ -1,77 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
-
-  const [errors, setErrors] = useState({
-    username: '',
-    email: '',
-    password: ''
+    username: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Basic validation logic
-    const newErrors = {};
-    if (!formData.username) newErrors.username = 'Username is required';
-    if (!formData.email) newErrors.email = 'Email is required';
-    if (!formData.password) newErrors.password = 'Password is required';
-
-    setErrors(newErrors);
-
-    // If no errors, submit the form data
-    if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted:', formData);
-      // Add API call or further logic here
-    }
+    console.log("Form submitted:", formData);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label>Username:</label>
-        <input 
-          type="text" 
-          name="username" 
-          value={formData.username} 
-          onChange={handleChange} 
+        <input
+          type="text"
+          name="username"
+          value={formData.username} // Controlled input
+          onChange={handleChange} // Updates state
         />
-        {errors.username && <div style={{ color: 'red' }}>{errors.username}</div>}
       </div>
 
       <div>
         <label>Email:</label>
-        <input 
-          type="email" 
-          name="email" 
-          value={formData.email} 
-          onChange={handleChange} 
+        <input
+          type="email"
+          name="email"
+          value={formData.email} // Controlled input
+          onChange={handleChange} // Updates state
         />
-        {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
       </div>
 
       <div>
         <label>Password:</label>
-        <input 
-          type="password" 
-          name="password" 
-          value={formData.password} 
-          onChange={handleChange} 
+        <input
+          type="password"
+          name="password"
+          value={formData.password} // Controlled input
+          onChange={handleChange} // Updates state
         />
-        {errors.password && <div style={{ color: 'red' }}>{errors.password}</div>}
       </div>
 
       <button type="submit">Register</button>
