@@ -1,6 +1,6 @@
 // src/components/ProtectedRoute.jsx
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';  // Import Navigate instead of Redirect
 import { useAuth } from '../hooks/useAuth'; // Import the useAuth hook
 
 // This component will protect routes by checking authentication
@@ -10,7 +10,7 @@ function ProtectedRoute({ element, ...rest }) {
   return (
     <Route
       {...rest}
-      element={isAuthenticated ? element : <Redirect to="/login" />}
+      element={isAuthenticated ? element : <Navigate to="/login" />}  // Use Navigate to redirect
     />
   );
 }
