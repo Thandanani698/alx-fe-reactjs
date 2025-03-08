@@ -1,66 +1,56 @@
+// src/TodoList.jsx
 import React, { useState } from 'react';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([
-    { id: 1, text: 'Learn React', completed: false },
-    { id: 2, text: 'Write tests', completed: false },
+    { text: 'First Todo', completed: false },
+    { text: 'Second Todo', completed: false },
   ]);
+  const [newTodo, setNewTodo] = useState('');
 
-  const addTodo = (text) => {
-    setTodos([...todos, { id: Date.now(), text, completed: false }]);
+  const addTodo = (e) => {
+    e.preventDefault();
+    if (newTodo.trim()) {
+      setTodos([...todos, { text: newTodo, completed: false }]);
+      setNewTodo('');
+    }
   };
 
-  const toggleTodo = (id) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
+  const toggleTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].completed = !newTodos[index].completed;
+    setTodos(newTodos);
   };
 
-  const deleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+  const deleteTodo = (index) => {
+    const newTodos = todos.filter((_, i) => i !== index);
+    setTodos(newTodos);
   };
 
   return (
     <div>
-      <h2>Todo List</h2>
+      <form onSubmit={addTodo}>
+        <input
+          type="text"
+          placeholder="Add a new todo"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+        />
+        <button type="submit">Add Todo</button>
+      </form>
       <ul>
-        {todos.map(todo => (
+        {todos.map((todo, index) => (
           <li
-            key={todo.id}
-            onClick={() => toggleTodo(todo.id)}
-            style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+            key={index}
+            onClick={() => toggleTodo(index)}
+            className={todo.completed ? 'completed' : ''}
           >
             {todo.text}
-            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>Delete</button>
+            <button onClick={() => deleteTodo(index)}>Delete</button>
           </li>
         ))}
       </ul>
-      <AddTodoForm addTodo={addTodo} />
     </div>
-  );
-};
-
-const AddTodoForm = ({ addTodo }) => {
-  const [input, setInput] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (input) {
-      addTodo(input);
-      setInput('');
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="New todo"
-      />
-      <button type="submit">Add Todo</button>
-    </form>
   );
 };
 

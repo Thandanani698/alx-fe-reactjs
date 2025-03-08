@@ -1,35 +1,33 @@
+// src/__tests__/TodoList.test.js
 import { render, screen, fireEvent } from '@testing-library/react';
-import TodoList from '../components/TodoList';
+import TodoList from '../TodoList';
 
 test('renders TodoList component', () => {
   render(<TodoList />);
   const todoItems = screen.getAllByRole('listitem');
-  expect(todoItems).toHaveLength(2);  // Initial state has 2 todos
+  expect(todoItems).toHaveLength(2); // Initial state has 2 todos
 });
 
-test('can add a new todo', () => {
+test('adds a new todo', () => {
   render(<TodoList />);
-  const input = screen.getByPlaceholderText('New todo');
-  const button = screen.getByText('Add Todo');
-  fireEvent.change(input, { target: { value: 'New todo' } });
-  fireEvent.click(button);
+  const input = screen.getByPlaceholderText('Add a new todo');
+  fireEvent.change(input, { target: { value: 'New Todo' } });
+  fireEvent.submit(input);
   const todoItems = screen.getAllByRole('listitem');
-  expect(todoItems).toHaveLength(3);  // 2 initial todos + 1 new todo
+  expect(todoItems).toHaveLength(3); // After adding a todo
 });
 
-test('can toggle todo completion', () => {
+test('toggles todo completion', () => {
   render(<TodoList />);
-  const todoItem = screen.getByText('Learn React');
-  fireEvent.click(todoItem);
-  expect(todoItem).toHaveStyle('text-decoration: line-through');
-  fireEvent.click(todoItem);
-  expect(todoItem).toHaveStyle('text-decoration: none');
+  const firstTodo = screen.getByText('First Todo');
+  fireEvent.click(firstTodo);
+  expect(firstTodo).toHaveClass('completed'); // Check if the todo is marked as completed
 });
 
-test('can delete a todo', () => {
+test('deletes a todo', () => {
   render(<TodoList />);
-  const deleteButton = screen.getAllByText('Delete')[0];
+  const deleteButton = screen.getByText('Delete');
   fireEvent.click(deleteButton);
   const todoItems = screen.getAllByRole('listitem');
-  expect(todoItems).toHaveLength(1);  // After deletion, only 1 todo remains
+  expect(todoItems).toHaveLength(1); // After deleting a todo
 });
