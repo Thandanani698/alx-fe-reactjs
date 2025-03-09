@@ -1,14 +1,15 @@
-// src/App.jsx
 import React from 'react';
 import TodoList from './TodoList';
 
-const App = () => {
+function App() {
+  const todos = ['Learn React', 'Build Projects'];
+
   return (
     <div>
-      <h1>Todo List</h1>
-      <TodoList />
+      <h1>My Todo List</h1>
+      <TodoList todos={todos} />
     </div>
   );
-};
+}
 
 export default App;
