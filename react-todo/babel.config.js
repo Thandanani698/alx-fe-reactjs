@@ -1,7 +1,6 @@
-module.exports = {
-    presets: [
-      '@babel/preset-react',  // Enables JSX transformation
-      '@babel/preset-env'     // Ensures compatibility with the latest JavaScript
-    ]
-  };
-  
+export default {
+  presets: [
+    '@babel/preset-react',
+    '@babel/preset-env'
+  ]
+};
