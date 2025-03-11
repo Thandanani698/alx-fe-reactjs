@@ -1,5 +1,6 @@
 // src/App.jsx
-import UserProfile from './components/UserProfile'; // Import the UserProfile component
+import UserProfile from './components/UserProfile.jsx';
+
 
 function App() {
   return (
