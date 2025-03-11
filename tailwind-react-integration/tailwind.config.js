@@ -1,15 +1,8 @@
-module.exports = {
-    content: [
-      "./index.html",        
-      "./src/**/*.{js,jsx,ts,tsx}",  
-    ],
-    darkMode: 'media',  
-    theme: {
-      extend: {},
-    },
-    variants: {
-      extend: {},
-    },
-    plugins: [],
-  }
-  
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"], // Correct replacement for `purge`
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
