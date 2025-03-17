@@ -14,7 +14,7 @@ function AddRecipeForm() {
     if (!preparation) newErrors.preparation = 'Preparation steps are required';
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; 
+    return Object.keys(newErrors).length === 0; // returns true if no errors
   };
 
   const handleSubmit = (e) => {
@@ -43,7 +43,7 @@ function AddRecipeForm() {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg"
+            className="w-full md:w-1/2 p-3 border border-gray-300 rounded-lg"
             placeholder="Enter recipe title"
           />
           {errors.title && <p className="text-red-500 text-sm mt-2">{errors.title}</p>}
@@ -55,7 +55,7 @@ function AddRecipeForm() {
             id="ingredients"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg"
+            className="w-full md:w-1/2 p-3 border border-gray-300 rounded-lg"
             rows="4"
             placeholder="Enter ingredients (separate by new lines)"
           />
@@ -68,7 +68,7 @@ function AddRecipeForm() {
             id="preparation"
             value={preparation}
             onChange={(e) => setPreparation(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg"
+            className="w-full md:w-1/2 p-3 border border-gray-300 rounded-lg"
             rows="6"
             placeholder="Enter preparation steps"
           />
