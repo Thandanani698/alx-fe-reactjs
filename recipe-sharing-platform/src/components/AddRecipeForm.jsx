@@ -14,18 +14,18 @@ function AddRecipeForm() {
     if (!preparation) newErrors.preparation = 'Preparation steps are required';
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // returns true if no errors
+    return Object.keys(newErrors).length === 0; 
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
 
-    // If validation passes, clear the errors and proceed with submission
+    
     setErrors({});
     console.log('Form submitted:', { title, ingredients, preparation });
 
-    // Clear the form after submission
+    
     setTitle('');
     setIngredients('');
     setPreparation('');
