@@ -1,8 +1,9 @@
+// In your App.jsx or another component
 function App() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <h1 className="text-3xl font-bold text-blue-500">
-        Tailwind CSS is working in Recipe Sharing Platform!
+        Hello, Tailwind CSS is working!
       </h1>
     </div>
   );
