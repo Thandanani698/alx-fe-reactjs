@@ -1,10 +1,11 @@
-// In your App.jsx or another component
+// src/App.jsx
+import React from 'react';
+import HomePage from './components/HomePage'; // Import the new component
+
 function App() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold text-blue-500">
-        Hello, Tailwind CSS is working!
-      </h1>
+    <div>
+      <HomePage /> {/* Render the new component */}
     </div>
   );
 }
