@@ -1,73 +1,68 @@
-import { useState } from "react";
-import { fetchUserData } from "../services/githubService"; // Ensure correct import
+import React, { useState } from 'react';
+import githubService from '../services/githubService';
 
 const Search = () => {
-  const [query, setQuery] = useState(""); // Username search term
-  const [location, setLocation] = useState(""); // Location search term
-  const [minRepos, setMinRepos] = useState(""); // Minimum repositories search term
-  const [users, setUsers] = useState([]);
+  const [username, setUsername] = useState('');
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState('');
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
-  const handleSearch = async (e) => {
-    e.preventDefault(); 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setLoading(true);
-    setError("");
+    setError(null);
 
     try {
-      const results = await fetchUserData(query, location, minRepos); 
-      setUsers(results);
+      const data = await githubService.fetchUserData(username, location, minRepos);
+      setUserData(data);
     } catch (err) {
-      setError("Looks like we cant find the user");
+      setError('Looks like we cant find the user');
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
-    <div className="p-4">
-      <form onSubmit={handleSearch} className="mb-4">
+    <div className="search-container">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search GitHub users..."
-          className="p-2 border rounded"
+          placeholder="Enter GitHub username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="input"
         />
         <input
           type="text"
+          placeholder="Location (optional)"
           value={location}
-          onChange={(e) => setLocation(e.target.value)} 
-          placeholder="Search by location"
-          className="p-2 border rounded ml-2"
+          onChange={(e) => setLocation(e.target.value)}
+          className="input"
         />
         <input
           type="number"
+          placeholder="Min Repositories (optional)"
           value={minRepos}
-          onChange={(e) => setMinRepos(e.target.value)} 
-          placeholder="Min Repositories"
-          className="p-2 border rounded ml-2"
+          onChange={(e) => setMinRepos(e.target.value)}
+          className="input"
         />
-        <button type="submit" className="ml-2 p-2 bg-blue-500 text-white rounded">
-          Search
-        </button>
+        <button type="submit" className="btn">Search</button>
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p>{error}</p>}
 
-      <ul>
-        {users.map((user) => (
-          <li key={user.id} className="p-2 border-b">
-            <img src={user.avatar_url} alt={user.login} className="w-10 h-10 rounded-full inline" />
-            <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="ml-2">
-              {user.login}
-            </a>
-            <p>{user.location ? `Location: ${user.location}` : "Location not provided"}</p> {/* Display location */}
-            <p>Repos: {user.public_repos}</p> {/* Display number of repositories */}
-          </li>
-        ))}
-      </ul>
+      {userData && (
+        <div className="result">
+          <img src={userData.avatar_url} alt={userData.name} className="avatar" />
+          <h3>{userData.name}</h3>
+          <p>{userData.location}</p>
+          <p>Repositories: {userData.public_repos}</p>
+          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">View Profile</a>
+        </div>
+      )}
     </div>
   );
 };
