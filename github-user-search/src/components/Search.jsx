@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService';
+import { fetchUserData } from '../services/githubService'; 
 
 function Search() {
   const [username, setUsername] = useState('');
@@ -20,7 +20,7 @@ function Search() {
       const data = await fetchUserData(username);
       setUserData(data);
     } catch (err) {
-      setError('Looks like we can’t find the user');
+      setError('Looks like we can’t find the user');  
     } finally {
       setLoading(false);
     }
@@ -39,7 +39,7 @@ function Search() {
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {error && <p>{error}</p>}  {/* Display error message */}
       {userData && !loading && !error && (
         <div>
           <h2>{userData.login}</h2>
