@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService'; // Import the API function
+import { fetchUserData } from '../services/githubService';
 
 function Search() {
   const [username, setUsername] = useState('');
@@ -7,7 +7,9 @@ function Search() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSearch = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();  
+
     if (!username) return;
 
     setLoading(true);
@@ -26,14 +28,16 @@ function Search() {
 
   return (
     <div>
-      <input 
-        type="text" 
-        placeholder="Enter GitHub username" 
-        value={username} 
-        onChange={(e) => setUsername(e.target.value)} 
-      />
-      <button onClick={handleSearch}>Search</button>
-      
+      <form onSubmit={handleSubmit}>
+        <input 
+          type="text" 
+          placeholder="Enter GitHub username" 
+          value={username} 
+          onChange={(e) => setUsername(e.target.value)} 
+        />
+        <button type="submit">Search</button>
+      </form>
+
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {userData && !loading && !error && (
