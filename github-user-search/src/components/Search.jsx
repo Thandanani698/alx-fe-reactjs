@@ -1,26 +1,29 @@
-import React, { useState } from 'react';
-import { fetchUsers } from '../services/githubService';
+import React, { useState } from "react";
+import { fetchUsers } from "../services/githubService";
 
 function Search() {
-  const [username, setUsername] = useState('');
-  const [location, setLocation] = useState('');
-  const [minRepos, setMinRepos] = useState('');
+  const [username, setUsername] = useState("");
+  const [location, setLocation] = useState("");
+  const [minRepos, setMinRepos] = useState("");
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
     setLoading(true);
-    setError('');
+    setError("");
     setUsers([]);
 
     try {
       const data = await fetchUsers(username, location, minRepos);
-      setUsers(data.items);
+      if (data.length === 0) {
+        setError("Looks like we cant find the user");
+      } else {
+        setUsers(data);
+      }
     } catch (err) {
-      setError('Looks like we cant find the user');
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
