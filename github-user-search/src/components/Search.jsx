@@ -28,10 +28,7 @@ function Search() {
 
   return (
     <div className="flex flex-col items-center mt-6">
-      <form 
-        onSubmit={handleSubmit} 
-        className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-md text-white"
-      >
+      <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-md text-white">
         <h2 className="text-2xl font-bold mb-4">GitHub User Search</h2>
         <input
           type="text"
@@ -54,10 +51,7 @@ function Search() {
           onChange={(e) => setMinRepos(e.target.value)}
           className="w-full p-2 mb-3 border rounded text-black"
         />
-        <button 
-          type="submit" 
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full"
-        >
+        <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full">
           Search
         </button>
       </form>
@@ -73,12 +67,7 @@ function Search() {
               <li key={user.id} className="bg-gray-700 p-4 rounded-lg shadow-md text-white">
                 <img src={user.avatar_url} alt={user.login} className="w-12 h-12 rounded-full inline-block mr-4" />
                 <span className="font-semibold">{user.login}</span>
-                <a 
-                  href={user.html_url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-blue-400 ml-4"
-                >
+                <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="text-blue-400 ml-4">
                   View Profile
                 </a>
               </li>
